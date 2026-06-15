@@ -19,5 +19,5 @@ Utilizar los archivos de la carpeta 'Tests', para hacer pruebas mediante Python 
 
 # Probar mapa georreferenciado
 
-Descargar el archivo 'yaku_digital_v2.html', abrirlo para tener una vista estática del mapa georreferenciado.
+Descargar y abrir el archivo 'yaku_digital_v2.html', para tener una vista estática del mapa georreferenciado.
 
