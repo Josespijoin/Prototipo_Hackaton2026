@@ -1,6 +1,6 @@
 # Revisar datasets
 
-Utilizar el archivo 'Hackatón - Desafío 11v2.ipynb', abrir en Google Colab y cargar archivos de la carpeta 'Datasets final' en este último
+Utilizar el archivo 'Hackatón - Desafío 11v2.ipynb', abrir en Google Colab y cargar archivos de la carpeta 'Datasets final' en este último.
 
 # Ejecutar proyecto
 
