@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f90960b0227e9a5f142689b8ae29c140 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+</head>
+<body>
+    
+    
+<style>
+    .yaku-panel {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 380px;
+        max-height: 85vh;
+        overflow-y: auto;
+        background: linear-gradient(135deg, #1a2a3a 0%, #0f1a24 100%);
+        color: #e8f0f8;
+        border-radius: 16px;
+        z-index: 9999;
+        padding: 18px;
+        font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        font-size: 12px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        border: 1px solid rgba(46, 204, 113, 0.3);
+        backdrop-filter: blur(4px);
+    }
+    
+    .yaku-panel::-webkit-scrollbar {
+        width: 6px;
+    }
+    .yaku-panel::-webkit-scrollbar-track {
+        background: #2c3e50;
+        border-radius: 3px;
+    }
+    .yaku-panel::-webkit-scrollbar-thumb {
+        background: #2ecc71;
+        border-radius: 3px;
+    }
+    
+    .yaku-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 12px;
+        border-bottom: 2px solid #2ecc71;
+        padding-bottom: 10px;
+    }
+    
+    .yaku-title {
+        font-size: 18px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #2ecc71, #27ae60);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .yaku-subtitle {
+        font-size: 10px;
+        color: #7f8c8d;
+    }
+    
+    .filter-group {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+    }
+    
+    .filter-select {
+        background: #2c3e50;
+        color: #ecf0f1;
+        border: 1px solid #3d566e;
+        border-radius: 20px;
+        padding: 6px 12px;
+        font-size: 11px;
+        flex: 1;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .filter-select:hover {
+        border-color: #2ecc71;
+    }
+    
+    .stat-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+    }
+    
+    .stat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 12px 0;
+    }
+    
+    .stat-card {
+        background: rgba(44, 62, 80, 0.6);
+        border-radius: 12px;
+        padding: 8px 10px;
+        text-align: center;
+    }
+    
+    .stat-value {
+        font-size: 20px;
+        font-weight: 700;
+    }
+    
+    .stat-label {
+        font-size: 10px;
+        color: #bdc3c7;
+    }
+    
+    .brecha-bar {
+        background: #2c3e50;
+        height: 8px;
+        border-radius: 4px;
+        margin-top: 4px;
+        overflow: hidden;
+    }
+    
+    .brecha-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.3s;
+    }
+    
+    .status-legend {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 10px 0;
+        padding: 8px 0;
+        border-top: 1px solid #2c3e50;
+        border-bottom: 1px solid #2c3e50;
+    }
+    
+    .legend-dot {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 4px;
+    }
+    
+    .footer-note {
+        font-size: 9px;
+        text-align: center;
+        color: #7f8c8d;
+        margin-top: 12px;
+        padding-top: 8px;
+        border-top: 1px solid #2c3e50;
+    }
+    
+    .badge-warning {
+        background: #e74c3c;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-size: 9px;
+        font-weight: bold;
+    }
+    
+    .indicator-box {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        padding: 10px;
+        margin: 10px 0;
+    }
+</style>
+
+<div class="yaku-panel">
+    <div class="yaku-header">
+        <span class="yaku-title">💧 YAKU DIGITAL</span>
+        <span class="yaku-subtitle">Plataforma Digital de Monitoreo Hídrico | ENAPRES 2024 | Piura</span>
+    </div>
+    
+    <!-- Filtros -->
+    <div class="filter-group">
+        <select id="filtro_tipo" class="filter-select">
+            <option value="todos">📋 Todos los tipos</option>
+            <option value="AGUA POTABLE">💧 AGUA POTABLE</option><option value="ALCANTARILLADO">💧 ALCANTARILLADO</option>
+        </select>
+        <select id="filtro_estado" class="filter-select">
+            <option value="todos">📊 Todos los estados</option>
+            <option value="PARALIZADO"><span style="color:#e74c3c">●</span> PARALIZADO</option><option value="POR CERRAR"><span style="color:#f1c40f">●</span> POR CERRAR</option><option value="SUSPENDIDO"><span style="color:#f39c12">●</span> SUSPENDIDO</option>
+        </select>
+        <select id="filtro_provincia" class="filter-select">
+            <option value="todos">📍 Todas las provincias</option>
+            <option value="AYABACA">📍 AYABACA</option><option value="HUANCABAMBA">📍 HUANCABAMBA</option><option value="PIURA">📍 PIURA</option><option value="SECHURA">📍 SECHURA</option><option value="SULLANA">📍 SULLANA</option>
+        </select>
+    </div>
+    
+    <div style="font-size: 10px; color: #2ecc71; text-align: center; margin-bottom: 10px;">
+        🔄 Filtros actualizan mapa y estadísticas en tiempo real
+    </div>
+    
+    <!-- Grid de estadísticas: Total proyectos, Por cerrar, Paralizados, Suspendidos -->
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="stat-value" id="stat_total">11</div>
+            <div class="stat-label">🏗️ Total proyectos</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="stat_por_cerrar">1</div>
+            <div class="stat-label">🟡 Por cerrar</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" style="color:#e74c3c;" id="stat_paralizados">7</div>
+            <div class="stat-label">🔴 Paralizados</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" style="color:#f39c12;" id="stat_suspendidos">3</div>
+            <div class="stat-label">🟠 Suspendidos</div>
+        </div>
+    </div>
+    
+    <!-- Beneficiarios (fila antes de inversión total) -->
+    <div class="stat-row" style="margin-bottom: 4px;">
+        <span>👥 Beneficiarios directos:</span>
+        <span><b id="stat_beneficiarios">423,645</b></span>
+    </div>
+    
+    <!-- Inversiones -->
+    <div class="stat-row">
+        <span>💰 Inversión total:</span>
+        <span><b>S/ 525.8M</b></span>
+    </div>
+    <div class="stat-row">
+        <span>⚠️ Inversión paralizada:</span>
+        <span><b style="color:#ff6b6b;">S/ 506.2M</b></span>
+    </div>
+    
+    <hr style="border-color: #2c3e50; margin: 12px 0;">
+    
+    <!-- Brecha agua potable -->
+    <div style="margin-bottom: 12px;">
+        <div class="stat-row">
+            <span>🚰 Brecha agua potable</span>
+            <span><b>18.07%</b> sin acceso</span>
+        </div>
+        <div class="brecha-bar">
+            <div class="brecha-fill" style="width: 18.07%; background: #e74c3c;"></div>
+        </div>
+        <div class="indicator-sub">354 personas</div>
+    </div>
+    
+    <!-- Brecha alcantarillado -->
+    <div style="margin-bottom: 12px;">
+        <div class="stat-row">
+            <span>🚽 Brecha alcantarillado</span>
+            <span><b>38.12%</b> sin acceso</span>
+        </div>
+        <div class="brecha-bar">
+            <div class="brecha-fill" style="width: 38.12%; background: #c0392b;"></div>
+        </div>
+        <div class="indicator-sub">746 personas</div>
+    </div>
+    
+    <!-- Agua segura -->
+    <div style="margin-bottom: 12px;">
+        <div class="stat-row">
+            <span>💧 Agua segura (cloro ≥0.5mg/L)</span>
+            <span><b>9.54%</b> <span class="badge-warning">Muy bajo</span></span>
+        </div>
+        <div class="brecha-bar">
+            <div class="brecha-fill" style="width: 9.54%; background: #e67e22;"></div>
+        </div>
+        <div class="indicator-sub">Estándar nacional: >95%</div>
+    </div>
+    
+    <!-- Prácticas adecuadas en uso de agua -->
+    <div style="margin-bottom: 12px;">
+        <div class="stat-row">
+            <span>🧼 Prácticas adecuadas en uso de agua</span>
+            <span><b>76.81%</b></span>
+        </div>
+        <div class="brecha-bar">
+            <div class="brecha-fill" style="width: 76.81%; background: #3498db;"></div>
+        </div>
+    </div>
+    
+    <!-- Pago O&M y Hogares que pagan -->
+    <div class="indicator-box">
+        <div class="stat-row">
+            <span>💰 Pago O&M rural:</span>
+            <span><b>S/ 9.54</b></span>
+        </div>
+        <div class="stat-row">
+            <span>📞 Hogares que pagan:</span>
+            <span><b>81.23%</b></span>
+        </div>
+    </div>
+    
+    <!-- Leyenda de estados -->
+    <div class="status-legend">
+        <div><span class="legend-dot" style="background: #e74c3c;"></span> Paralizado</div>
+        <div><span class="legend-dot" style="background: #f39c12;"></span> Suspendido</div>
+        <div><span class="legend-dot" style="background: #f1c40f;"></span> Por cerrar</div>
+    </div>
+    
+    <!-- Fuente -->
+    <div class="footer-note">
+        Fuente: ENAPRES 2024 (INEI) | Proyecto: PISU / MVCS<br>
+        Hackatón Transformagob 2026 - YAKU DIGITAL
+    </div>
+</div>
+
+<script>
+    var proyectosData = [{"id": 0, "cui": "2307711", "nombre": "AMPLIACI\u00d3N Y MEJORAMIENTO DE SERVICIOS DE AGUA POTABLE Y ALCANTARILLADO - PARACHIQUE", "provincia": "SECHURA", "estado": "PARALIZADO", "tipo": "AGUA POTABLE", "lat": -5.5576, "lng": -80.8222, "avance": 46.7, "beneficiarios": 25965, "monto": 60404253.47, "anos_retraso": 4.0}, {"id": 1, "cui": "2030755", "nombre": "AMPLIACI\u00d3N Y MEJORAMIENTO DE SISTEMAS DE AGUA POTABLE - LA ARENA", "provincia": "PIURA", "estado": "PARALIZADO", "tipo": "AGUA POTABLE", "lat": -5.1945, "lng": -80.6328, "avance": 77.76, "beneficiarios": 17656, "monto": 22726345.75, "anos_retraso": 15.2}, {"id": 2, "cui": "2056438", "nombre": "AMPLIACI\u00d3N DEL SISTEMA DE AGUA POTABLE - UPIS LUIS ANTONIO EGUIGUREN", "provincia": "PIURA", "estado": "PARALIZADO", "tipo": "AGUA POTABLE", "lat": -5.2, "lng": -80.63, "avance": 84.14, "beneficiarios": 9895, "monto": 26864446.49, "anos_retraso": 11.7}, {"id": 3, "cui": "2090577", "nombre": "AMPLIACI\u00d3N Y REHABILITACI\u00d3N DE SISTEMAS DE AGUA POTABLE - TAMBOGRANDE", "provincia": "PIURA", "estado": "PARALIZADO", "tipo": "AGUA POTABLE", "lat": -4.9333, "lng": -80.35, "avance": 100.0, "beneficiarios": 30036, "monto": 58302488.2, "anos_retraso": 10.1}, {"id": 4, "cui": "2376184", "nombre": "MEJORAMIENTO DE CALIDAD DE AGUA POTABLE - PTAP SULLANA", "provincia": "SULLANA", "estado": "PARALIZADO", "tipo": "AGUA POTABLE", "lat": -4.9039, "lng": -80.6853, "avance": 18.91, "beneficiarios": 243621, "monto": 242928460.0, "anos_retraso": 1.7}, {"id": 5, "cui": "2148113", "nombre": "MEJORAMIENTO DEL COLECTOR SAN MIGUEL", "provincia": "SULLANA", "estado": "POR CERRAR", "tipo": "ALCANTARILLADO", "lat": -4.9, "lng": -80.68, "avance": 97.0, "beneficiarios": 73089, "monto": 18764626.74, "anos_retraso": 11.5}, {"id": 6, "cui": "2056440", "nombre": "MEJORAMIENTO Y AMPLIACI\u00d3N DE AGUA POTABLE - QUERECOTILLO", "provincia": "SULLANA", "estado": "PARALIZADO", "tipo": "AGUA POTABLE", "lat": -4.8333, "lng": -80.45, "avance": 97.0, "beneficiarios": 13477, "monto": 39758247.66, "anos_retraso": 10.7}, {"id": 7, "cui": "2436071", "nombre": "REHABILITACI\u00d3N DE AGUA POTABLE - LOCALIDAD PROGRESO KM 65", "provincia": "HUANCABAMBA", "estado": "SUSPENDIDO", "tipo": "AGUA POTABLE", "lat": -5.2383, "lng": -79.45, "avance": 76.47, "beneficiarios": 176, "monto": 279696.88, "anos_retraso": 6.5}, {"id": 8, "cui": "2436074", "nombre": "REHABILITACI\u00d3N DE AGUA POTABLE - LOCALIDAD HUALAPAMPA", "provincia": "HUANCABAMBA", "estado": "SUSPENDIDO", "tipo": "AGUA POTABLE", "lat": -5.24, "lng": -79.455, "avance": 65.37, "beneficiarios": 368, "monto": 493314.41, "anos_retraso": 6.5}, {"id": 9, "cui": "2436483", "nombre": "REHABILITACI\u00d3N DE AGUA POTABLE - LOCALIDAD SAN ISIDRO", "provincia": "AYABACA", "estado": "SUSPENDIDO", "tipo": "AGUA POTABLE", "lat": -4.65, "lng": -79.7167, "avance": 71.58, "beneficiarios": 107, "monto": 101827.07, "anos_retraso": 6.4}, {"id": 10, "cui": "CI44403", "nombre": "CREACI\u00d3N DEL SERVICIO DE AGUA POTABLE - URB. LOMAS DE PIURA", "provincia": "PIURA", "estado": "PARALIZADO", "tipo": "AGUA POTABLE", "lat": -5.1667, "lng": -80.6, "avance": 0.0, "beneficiarios": 9255, "monto": 55206700.0, "anos_retraso": 6.5}];
+    
+    function aplicarFiltros() {
+        var tipoFiltro = document.getElementById('filtro_tipo').value;
+        var estadoFiltro = document.getElementById('filtro_estado').value;
+        var provinciaFiltro = document.getElementById('filtro_provincia').value;
+        
+        var filtrados = proyectosData.filter(function(p) {
+            if (tipoFiltro !== 'todos' && p.tipo !== tipoFiltro) return false;
+            if (estadoFiltro !== 'todos' && p.estado !== estadoFiltro) return false;
+            if (provinciaFiltro !== 'todos' && p.provincia !== provinciaFiltro) return false;
+            return true;
+        });
+        
+        var paralizados = filtrados.filter(p => p.estado === 'PARALIZADO').length;
+        var suspendidos = filtrados.filter(p => p.estado === 'SUSPENDIDO').length;
+        var porCerrar = filtrados.filter(p => p.estado === 'POR CERRAR').length;
+        
+        document.getElementById('stat_total').innerText = filtrados.length;
+        document.getElementById('stat_por_cerrar').innerText = porCerrar;
+        document.getElementById('stat_paralizados').innerText = paralizados;
+        document.getElementById('stat_suspendidos').innerText = suspendidos;
+        document.getElementById('stat_beneficiarios').innerText = filtrados.reduce((s,p) => s + p.beneficiarios, 0).toLocaleString();
+        
+        var markers = document.querySelectorAll('.leaflet-marker-icon');
+        for(var i = 0; i < markers.length; i++) {
+            if (i < filtrados.length) {
+                markers[i].style.display = '';
+            } else {
+                markers[i].style.display = 'none';
+            }
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var markers = document.querySelectorAll('.leaflet-marker-icon');
+        }, 500);
+        
+        document.getElementById('filtro_tipo').addEventListener('change', aplicarFiltros);
+        document.getElementById('filtro_estado').addEventListener('change', aplicarFiltros);
+        document.getElementById('filtro_provincia').addEventListener('change', aplicarFiltros);
+    });
+</script>
+    
+            <div class="folium-map" id="map_f90960b0227e9a5f142689b8ae29c140" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f90960b0227e9a5f142689b8ae29c140 = L.map(
+                "map_f90960b0227e9a5f142689b8ae29c140",
+                {
+                    center: [-5.1945, -80.6328],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 8.5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_f90960b0227e9a5f142689b8ae29c140);
+
+            
+
+        
+    
+            var tile_layer_fb78e8495c5b8c169efe3ce6705fddd1 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_fb78e8495c5b8c169efe3ce6705fddd1.addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+            var tile_layer_bc4414a6fc3268425589c3a6c79bee0b = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri | World Imagery",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_bc4414a6fc3268425589c3a6c79bee0b.addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+            var tile_layer_895197f0e3e396b045b1ce1964890467 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_895197f0e3e396b045b1ce1964890467.addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+            var circle_marker_d063ba8874473b7d2323c6897e4c1df4 = L.circleMarker(
+                [-5.1945, -80.6328],
+                {"bubblingMouseEvents": true, "color": "#FF4500", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF4500", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.1, "stroke": true, "weight": 2}
+            ).addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+        var popup_ca1fd50ed822b66027ed764cfcbd066d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7d985ee580af7087e1294c26ee637cf1 = $(`<div id="html_7d985ee580af7087e1294c26ee637cf1" style="width: 100.0%; height: 100.0%;">             <b>Provincia: PIURA</b><br>             Brecha agua: 18.5%<br>             Brecha alcantarillado: 39.2%<br>             Población afectada: ~89,000 personas             </div>`)[0];
+                popup_ca1fd50ed822b66027ed764cfcbd066d.setContent(html_7d985ee580af7087e1294c26ee637cf1);
+            
+        
+
+        circle_marker_d063ba8874473b7d2323c6897e4c1df4.bindPopup(popup_ca1fd50ed822b66027ed764cfcbd066d)
+        ;
+
+        
+    
+    
+            circle_marker_d063ba8874473b7d2323c6897e4c1df4.bindTooltip(
+                `<div>
+                     PIURA: 18.5% sin agua potable
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d155287f08a77e844b3b44e780d6c7c0 = L.circleMarker(
+                [-4.9039, -80.6853],
+                {"bubblingMouseEvents": true, "color": "#FF4500", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF4500", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.52, "stroke": true, "weight": 2}
+            ).addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+        var popup_694454b4e7eb392ffc497016be8f5bc1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d2bc1307a99c770b8d0de2418a4e2ab3 = $(`<div id="html_d2bc1307a99c770b8d0de2418a4e2ab3" style="width: 100.0%; height: 100.0%;">             <b>Provincia: SULLANA</b><br>             Brecha agua: 19.2%<br>             Brecha alcantarillado: 41.5%<br>             Población afectada: ~156,000 personas             </div>`)[0];
+                popup_694454b4e7eb392ffc497016be8f5bc1.setContent(html_d2bc1307a99c770b8d0de2418a4e2ab3);
+            
+        
+
+        circle_marker_d155287f08a77e844b3b44e780d6c7c0.bindPopup(popup_694454b4e7eb392ffc497016be8f5bc1)
+        ;
+
+        
+    
+    
+            circle_marker_d155287f08a77e844b3b44e780d6c7c0.bindTooltip(
+                `<div>
+                     SULLANA: 19.2% sin agua potable
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c9ff851b050bab0841f85425b0450864 = L.circleMarker(
+                [-5.5576, -80.8222],
+                {"bubblingMouseEvents": true, "color": "#FFA500", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFA500", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.08, "stroke": true, "weight": 2}
+            ).addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+        var popup_bb01f5a81fe1d986eefbc9faa15e75a5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f673f0c99022ba0b01d82a4387d5ca3d = $(`<div id="html_f673f0c99022ba0b01d82a4387d5ca3d" style="width: 100.0%; height: 100.0%;">             <b>Provincia: SECHURA</b><br>             Brecha agua: 16.8%<br>             Brecha alcantarillado: 35.7%<br>             Población afectada: ~42,000 personas             </div>`)[0];
+                popup_bb01f5a81fe1d986eefbc9faa15e75a5.setContent(html_f673f0c99022ba0b01d82a4387d5ca3d);
+            
+        
+
+        circle_marker_c9ff851b050bab0841f85425b0450864.bindPopup(popup_bb01f5a81fe1d986eefbc9faa15e75a5)
+        ;
+
+        
+    
+    
+            circle_marker_c9ff851b050bab0841f85425b0450864.bindTooltip(
+                `<div>
+                     SECHURA: 16.8% sin agua potable
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_21c0ba3af18f24af5185a8367a741059 = L.circleMarker(
+                [-5.2383, -79.45],
+                {"bubblingMouseEvents": true, "color": "#FF4500", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF4500", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.5, "stroke": true, "weight": 2}
+            ).addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+        var popup_7f5d9b8f2d72edf9405d25921e007776 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b873c377dfffad533223d49367b8ac23 = $(`<div id="html_b873c377dfffad533223d49367b8ac23" style="width: 100.0%; height: 100.0%;">             <b>Provincia: HUANCABAMBA</b><br>             Brecha agua: 22.5%<br>             Brecha alcantarillado: 48.3%<br>             Población afectada: ~35,000 personas             </div>`)[0];
+                popup_7f5d9b8f2d72edf9405d25921e007776.setContent(html_b873c377dfffad533223d49367b8ac23);
+            
+        
+
+        circle_marker_21c0ba3af18f24af5185a8367a741059.bindPopup(popup_7f5d9b8f2d72edf9405d25921e007776)
+        ;
+
+        
+    
+    
+            circle_marker_21c0ba3af18f24af5185a8367a741059.bindTooltip(
+                `<div>
+                     HUANCABAMBA: 22.5% sin agua potable
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_06c3a95db5ae6e715f21815c8a1f904c = L.circleMarker(
+                [-4.65, -79.7167],
+                {"bubblingMouseEvents": true, "color": "#FF4500", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF4500", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.46, "stroke": true, "weight": 2}
+            ).addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+        var popup_02a6993c10e32dee48a8108b01886ad0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7aa5e46cf0470b109fb982f8d31b0e05 = $(`<div id="html_7aa5e46cf0470b109fb982f8d31b0e05" style="width: 100.0%; height: 100.0%;">             <b>Provincia: AYABACA</b><br>             Brecha agua: 24.1%<br>             Brecha alcantarillado: 52.6%<br>             Población afectada: ~28,000 personas             </div>`)[0];
+                popup_02a6993c10e32dee48a8108b01886ad0.setContent(html_7aa5e46cf0470b109fb982f8d31b0e05);
+            
+        
+
+        circle_marker_06c3a95db5ae6e715f21815c8a1f904c.bindPopup(popup_02a6993c10e32dee48a8108b01886ad0)
+        ;
+
+        
+    
+    
+            circle_marker_06c3a95db5ae6e715f21815c8a1f904c.bindTooltip(
+                `<div>
+                     AYABACA: 24.1% sin agua potable
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f9dc16f707631a7a1c23cc5589d7658d = L.circleMarker(
+                [-5.0892, -81.1144],
+                {"bubblingMouseEvents": true, "color": "#FFA500", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFA500", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.240000000000002, "stroke": true, "weight": 2}
+            ).addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+        var popup_5037a791156858cf308d783a14d233e0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2580b11907b26dc57f8452cd73662aed = $(`<div id="html_2580b11907b26dc57f8452cd73662aed" style="width: 100.0%; height: 100.0%;">             <b>Provincia: PAITA</b><br>             Brecha agua: 15.4%<br>             Brecha alcantarillado: 32.1%<br>             Población afectada: ~31,000 personas             </div>`)[0];
+                popup_5037a791156858cf308d783a14d233e0.setContent(html_2580b11907b26dc57f8452cd73662aed);
+            
+        
+
+        circle_marker_f9dc16f707631a7a1c23cc5589d7658d.bindPopup(popup_5037a791156858cf308d783a14d233e0)
+        ;
+
+        
+    
+    
+            circle_marker_f9dc16f707631a7a1c23cc5589d7658d.bindTooltip(
+                `<div>
+                     PAITA: 15.4% sin agua potable
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_176c69d3bcc2fb29d32a76d7909d938b = L.circleMarker(
+                [-5.1864, -79.97],
+                {"bubblingMouseEvents": true, "color": "#FF4500", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF4500", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.18, "stroke": true, "weight": 2}
+            ).addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+        var popup_48f23a49ae69710d3cefa067c5b9d470 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_aed43f90ac4c488e3cb104812475076b = $(`<div id="html_aed43f90ac4c488e3cb104812475076b" style="width: 100.0%; height: 100.0%;">             <b>Provincia: MORROPON</b><br>             Brecha agua: 20.3%<br>             Brecha alcantarillado: 44.8%<br>             Población afectada: ~22,000 personas             </div>`)[0];
+                popup_48f23a49ae69710d3cefa067c5b9d470.setContent(html_aed43f90ac4c488e3cb104812475076b);
+            
+        
+
+        circle_marker_176c69d3bcc2fb29d32a76d7909d938b.bindPopup(popup_48f23a49ae69710d3cefa067c5b9d470)
+        ;
+
+        
+    
+    
+            circle_marker_176c69d3bcc2fb29d32a76d7909d938b.bindTooltip(
+                `<div>
+                     MORROPON: 20.3% sin agua potable
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_cluster_e868d568377488d39192b8eabe5e66dc = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_0f5b36237abfb864ee1a81fa531d2d68 = L.marker(
+                [-5.5576, -80.8222],
+                {
+}
+            ).addTo(marker_cluster_e868d568377488d39192b8eabe5e66dc);
+        
+    
+            var div_icon_0e30c618b47dd098f6470ef2a955fe1f = L.divIcon({
+  "html": "\u003cdiv style=\"background-color: #e74c3c; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);\"\u003e\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_bcb49f33cf83a5baf493d83db5aa9745 = L.popup({
+  "maxWidth": 380,
+});
+
+        
+            
+                var html_510ff360b748e60d2a11c75926782c0d = $(`<div id="html_510ff360b748e60d2a11c75926782c0d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 320px;">         <h4 style="color: #1a5276; margin-bottom: 5px;">AMPLIACIÓN Y MEJORAMIENTO DE SERVICIOS DE AGUA POTABLE Y ALC...</h4>         <hr style="margin: 5px 0;">         <table style="width: 100%; font-size: 12px;">             <tr><td><strong>CUI:</strong></strong></td><td>2307711</td></tr>             <tr><td><strong>Distrito/Provincia:</strong></td></td><td>SECHURA / SECHURA</td></tr>             <tr>                 <td><strong>Estado:</strong></td>                 <td><span style="background-color: #e74c3c; color: white; padding: 2px 5px; border-radius: 10px;">PARALIZADO</span></td>             </tr>             <tr><td><strong>Causa:</strong></td><td>Discrepancias, controversias y arbitraje</td></tr>             <tr>                 <td><strong>Avance Físico:</strong></td>                 <td><progress value="46.7" max="100" style="width: 100px;"></progress> 46.7%</td>             </tr>             <tr><td><strong>Monto:</strong></td><td>S/ 60.404.253.47</td></tr>             <tr><td><strong>Beneficiarios:</strong></td><td>25.965</td></tr>             <tr><td><strong>Tiempo paralizado:</strong></td><td>4.0 años</td></tr>             <tr><td><strong>Tipo:</strong></td><td>AGUA POTABLE / URBANO</td></tr>         </table>     </div>     </div>`)[0];
+                popup_bcb49f33cf83a5baf493d83db5aa9745.setContent(html_510ff360b748e60d2a11c75926782c0d);
+            
+        
+
+        marker_0f5b36237abfb864ee1a81fa531d2d68.bindPopup(popup_bcb49f33cf83a5baf493d83db5aa9745)
+        ;
+
+        
+    
+    
+            marker_0f5b36237abfb864ee1a81fa531d2d68.bindTooltip(
+                `<div>
+                     AMPLIACIÓN Y MEJORAMIENTO DE SERVICIOS D... - PARALIZADO - 46.7%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0f5b36237abfb864ee1a81fa531d2d68.setIcon(div_icon_0e30c618b47dd098f6470ef2a955fe1f);
+            
+    
+            var marker_2727a6650dc55b439304f7cada77e8a2 = L.marker(
+                [-5.1945, -80.6328],
+                {
+}
+            ).addTo(marker_cluster_e868d568377488d39192b8eabe5e66dc);
+        
+    
+            var div_icon_9658ede7443d7f92ac50325e6864951d = L.divIcon({
+  "html": "\u003cdiv style=\"background-color: #e74c3c; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);\"\u003e\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_11f63c00216473224d113e5e7458f3b9 = L.popup({
+  "maxWidth": 380,
+});
+
+        
+            
+                var html_7cbc97bb1491f8792f1c138a6e3de27e = $(`<div id="html_7cbc97bb1491f8792f1c138a6e3de27e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 320px;">         <h4 style="color: #1a5276; margin-bottom: 5px;">AMPLIACIÓN Y MEJORAMIENTO DE SISTEMAS DE AGUA POTABLE - LA A...</h4>         <hr style="margin: 5px 0;">         <table style="width: 100%; font-size: 12px;">             <tr><td><strong>CUI:</strong></strong></td><td>2030755</td></tr>             <tr><td><strong>Distrito/Provincia:</strong></td></td><td>LA ARENA / PIURA</td></tr>             <tr>                 <td><strong>Estado:</strong></td>                 <td><span style="background-color: #e74c3c; color: white; padding: 2px 5px; border-radius: 10px;">PARALIZADO</span></td>             </tr>             <tr><td><strong>Causa:</strong></td><td>Incumplimiento de contrato</td></tr>             <tr>                 <td><strong>Avance Físico:</strong></td>                 <td><progress value="77.76" max="100" style="width: 100px;"></progress> 77.76%</td>             </tr>             <tr><td><strong>Monto:</strong></td><td>S/ 22.726.345.75</td></tr>             <tr><td><strong>Beneficiarios:</strong></td><td>17.656</td></tr>             <tr><td><strong>Tiempo paralizado:</strong></td><td>15.2 años</td></tr>             <tr><td><strong>Tipo:</strong></td><td>AGUA POTABLE / URBANO</td></tr>         </table>     </div>     </div>`)[0];
+                popup_11f63c00216473224d113e5e7458f3b9.setContent(html_7cbc97bb1491f8792f1c138a6e3de27e);
+            
+        
+
+        marker_2727a6650dc55b439304f7cada77e8a2.bindPopup(popup_11f63c00216473224d113e5e7458f3b9)
+        ;
+
+        
+    
+    
+            marker_2727a6650dc55b439304f7cada77e8a2.bindTooltip(
+                `<div>
+                     AMPLIACIÓN Y MEJORAMIENTO DE SISTEMAS DE... - PARALIZADO - 77.76%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2727a6650dc55b439304f7cada77e8a2.setIcon(div_icon_9658ede7443d7f92ac50325e6864951d);
+            
+    
+            var marker_627ecffe4c800e89a91d69545014fa2e = L.marker(
+                [-5.2, -80.63],
+                {
+}
+            ).addTo(marker_cluster_e868d568377488d39192b8eabe5e66dc);
+        
+    
+            var div_icon_92aba807052ede098f72b3f522153e7d = L.divIcon({
+  "html": "\u003cdiv style=\"background-color: #e74c3c; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);\"\u003e\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_e8e851456bbed1e3beb13167244af5ff = L.popup({
+  "maxWidth": 380,
+});
+
+        
+            
+                var html_ac6c8327d48899ed8577da0c825bbf66 = $(`<div id="html_ac6c8327d48899ed8577da0c825bbf66" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 320px;">         <h4 style="color: #1a5276; margin-bottom: 5px;">AMPLIACIÓN DEL SISTEMA DE AGUA POTABLE - UPIS LUIS ANTONIO E...</h4>         <hr style="margin: 5px 0;">         <table style="width: 100%; font-size: 12px;">             <tr><td><strong>CUI:</strong></strong></td><td>2056438</td></tr>             <tr><td><strong>Distrito/Provincia:</strong></td></td><td>PIURA / PIURA</td></tr>             <tr>                 <td><strong>Estado:</strong></td>                 <td><span style="background-color: #e74c3c; color: white; padding: 2px 5px; border-radius: 10px;">PARALIZADO</span></td>             </tr>             <tr><td><strong>Causa:</strong></td><td>Deficiencia en el expediente técnico</td></tr>             <tr>                 <td><strong>Avance Físico:</strong></td>                 <td><progress value="84.14" max="100" style="width: 100px;"></progress> 84.14%</td>             </tr>             <tr><td><strong>Monto:</strong></td><td>S/ 26.864.446.49</td></tr>             <tr><td><strong>Beneficiarios:</strong></td><td>9.895</td></tr>             <tr><td><strong>Tiempo paralizado:</strong></td><td>11.7 años</td></tr>             <tr><td><strong>Tipo:</strong></td><td>AGUA POTABLE / URBANO</td></tr>         </table>     </div>     </div>`)[0];
+                popup_e8e851456bbed1e3beb13167244af5ff.setContent(html_ac6c8327d48899ed8577da0c825bbf66);
+            
+        
+
+        marker_627ecffe4c800e89a91d69545014fa2e.bindPopup(popup_e8e851456bbed1e3beb13167244af5ff)
+        ;
+
+        
+    
+    
+            marker_627ecffe4c800e89a91d69545014fa2e.bindTooltip(
+                `<div>
+                     AMPLIACIÓN DEL SISTEMA DE AGUA POTABLE -... - PARALIZADO - 84.14%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_627ecffe4c800e89a91d69545014fa2e.setIcon(div_icon_92aba807052ede098f72b3f522153e7d);
+            
+    
+            var marker_873fc561168acef989e20cf9d3671cc7 = L.marker(
+                [-4.9333, -80.35],
+                {
+}
+            ).addTo(marker_cluster_e868d568377488d39192b8eabe5e66dc);
+        
+    
+            var div_icon_986d4d237988c0f9f979718f2c2cdbc0 = L.divIcon({
+  "html": "\u003cdiv style=\"background-color: #e74c3c; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);\"\u003e\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_a597cdf01ffbd107ca556f48678b3308 = L.popup({
+  "maxWidth": 380,
+});
+
+        
+            
+                var html_aaa2c42e7ba53d8373e07fd3a9904f47 = $(`<div id="html_aaa2c42e7ba53d8373e07fd3a9904f47" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 320px;">         <h4 style="color: #1a5276; margin-bottom: 5px;">AMPLIACIÓN Y REHABILITACIÓN DE SISTEMAS DE AGUA POTABLE - TA...</h4>         <hr style="margin: 5px 0;">         <table style="width: 100%; font-size: 12px;">             <tr><td><strong>CUI:</strong></strong></td><td>2090577</td></tr>             <tr><td><strong>Distrito/Provincia:</strong></td></td><td>TAMBO GRANDE / PIURA</td></tr>             <tr>                 <td><strong>Estado:</strong></td>                 <td><span style="background-color: #e74c3c; color: white; padding: 2px 5px; border-radius: 10px;">PARALIZADO</span></td>             </tr>             <tr><td><strong>Causa:</strong></td><td>Deficiencia administrativa de la UE</td></tr>             <tr>                 <td><strong>Avance Físico:</strong></td>                 <td><progress value="100.0" max="100" style="width: 100px;"></progress> 100.0%</td>             </tr>             <tr><td><strong>Monto:</strong></td><td>S/ 58.302.488.20</td></tr>             <tr><td><strong>Beneficiarios:</strong></td><td>30.036</td></tr>             <tr><td><strong>Tiempo paralizado:</strong></td><td>10.1 años</td></tr>             <tr><td><strong>Tipo:</strong></td><td>AGUA POTABLE / URBANO</td></tr>         </table>     </div>     </div>`)[0];
+                popup_a597cdf01ffbd107ca556f48678b3308.setContent(html_aaa2c42e7ba53d8373e07fd3a9904f47);
+            
+        
+
+        marker_873fc561168acef989e20cf9d3671cc7.bindPopup(popup_a597cdf01ffbd107ca556f48678b3308)
+        ;
+
+        
+    
+    
+            marker_873fc561168acef989e20cf9d3671cc7.bindTooltip(
+                `<div>
+                     AMPLIACIÓN Y REHABILITACIÓN DE SISTEMAS ... - PARALIZADO - 100.0%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_873fc561168acef989e20cf9d3671cc7.setIcon(div_icon_986d4d237988c0f9f979718f2c2cdbc0);
+            
+    
+            var marker_4da78137509ec0dc4e19556385d92d07 = L.marker(
+                [-4.9039, -80.6853],
+                {
+}
+            ).addTo(marker_cluster_e868d568377488d39192b8eabe5e66dc);
+        
+    
+            var div_icon_d5c1a59cb4e3f683c78e9347039cd914 = L.divIcon({
+  "html": "\u003cdiv style=\"background-color: #e74c3c; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);\"\u003e\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_0ed00286a0ca2d7e08d8157e80daeb81 = L.popup({
+  "maxWidth": 380,
+});
+
+        
+            
+                var html_b7771324542c5f5c8b0faa83120a4247 = $(`<div id="html_b7771324542c5f5c8b0faa83120a4247" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 320px;">         <h4 style="color: #1a5276; margin-bottom: 5px;">MEJORAMIENTO DE CALIDAD DE AGUA POTABLE - PTAP SULLANA...</h4>         <hr style="margin: 5px 0;">         <table style="width: 100%; font-size: 12px;">             <tr><td><strong>CUI:</strong></strong></td><td>2376184</td></tr>             <tr><td><strong>Distrito/Provincia:</strong></td></td><td>SULLANA / SULLANA</td></tr>             <tr>                 <td><strong>Estado:</strong></td>                 <td><span style="background-color: #e74c3c; color: white; padding: 2px 5px; border-radius: 10px;">PARALIZADO</span></td>             </tr>             <tr><td><strong>Causa:</strong></td><td>Resolución de Contrato</td></tr>             <tr>                 <td><strong>Avance Físico:</strong></td>                 <td><progress value="18.91" max="100" style="width: 100px;"></progress> 18.91%</td>             </tr>             <tr><td><strong>Monto:</strong></td><td>S/ 242.928.460.00</td></tr>             <tr><td><strong>Beneficiarios:</strong></td><td>243.621</td></tr>             <tr><td><strong>Tiempo paralizado:</strong></td><td>1.7 años</td></tr>             <tr><td><strong>Tipo:</strong></td><td>AGUA POTABLE / URBANO</td></tr>         </table>     </div>     </div>`)[0];
+                popup_0ed00286a0ca2d7e08d8157e80daeb81.setContent(html_b7771324542c5f5c8b0faa83120a4247);
+            
+        
+
+        marker_4da78137509ec0dc4e19556385d92d07.bindPopup(popup_0ed00286a0ca2d7e08d8157e80daeb81)
+        ;
+
+        
+    
+    
+            marker_4da78137509ec0dc4e19556385d92d07.bindTooltip(
+                `<div>
+                     MEJORAMIENTO DE CALIDAD DE AGUA POTABLE ... - PARALIZADO - 18.91%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4da78137509ec0dc4e19556385d92d07.setIcon(div_icon_d5c1a59cb4e3f683c78e9347039cd914);
+            
+    
+            var marker_794f91957689a97275cf2ef2c896d862 = L.marker(
+                [-4.9, -80.68],
+                {
+}
+            ).addTo(marker_cluster_e868d568377488d39192b8eabe5e66dc);
+        
+    
+            var div_icon_f2711fcd42128e0dca4a097c25782127 = L.divIcon({
+  "html": "\u003cdiv style=\"background-color: #f1c40f; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);\"\u003e\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_7dc55c928c1753c8ee95b4847b13435d = L.popup({
+  "maxWidth": 380,
+});
+
+        
+            
+                var html_0d31c93f824a21fd9ea913199deb5f76 = $(`<div id="html_0d31c93f824a21fd9ea913199deb5f76" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 320px;">         <h4 style="color: #1a5276; margin-bottom: 5px;">MEJORAMIENTO DEL COLECTOR SAN MIGUEL...</h4>         <hr style="margin: 5px 0;">         <table style="width: 100%; font-size: 12px;">             <tr><td><strong>CUI:</strong></strong></td><td>2148113</td></tr>             <tr><td><strong>Distrito/Provincia:</strong></td></td><td>BELLAVISTA / SULLANA</td></tr>             <tr>                 <td><strong>Estado:</strong></td>                 <td><span style="background-color: #f1c40f; color: white; padding: 2px 5px; border-radius: 10px;">POR CERRAR</span></td>             </tr>             <tr><td><strong>Causa:</strong></td><td>Paralizada - Permanente</td></tr>             <tr>                 <td><strong>Avance Físico:</strong></td>                 <td><progress value="97.0" max="100" style="width: 100px;"></progress> 97.0%</td>             </tr>             <tr><td><strong>Monto:</strong></td><td>S/ 18.764.626.74</td></tr>             <tr><td><strong>Beneficiarios:</strong></td><td>73.089</td></tr>             <tr><td><strong>Tiempo paralizado:</strong></td><td>11.5 años</td></tr>             <tr><td><strong>Tipo:</strong></td><td>ALCANTARILLADO / URBANO</td></tr>         </table>     </div>     </div>`)[0];
+                popup_7dc55c928c1753c8ee95b4847b13435d.setContent(html_0d31c93f824a21fd9ea913199deb5f76);
+            
+        
+
+        marker_794f91957689a97275cf2ef2c896d862.bindPopup(popup_7dc55c928c1753c8ee95b4847b13435d)
+        ;
+
+        
+    
+    
+            marker_794f91957689a97275cf2ef2c896d862.bindTooltip(
+                `<div>
+                     MEJORAMIENTO DEL COLECTOR SAN MIGUEL... - POR CERRAR - 97.0%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_794f91957689a97275cf2ef2c896d862.setIcon(div_icon_f2711fcd42128e0dca4a097c25782127);
+            
+    
+            var marker_84ed8e57d041dba9b4c3272baec1967b = L.marker(
+                [-4.8333, -80.45],
+                {
+}
+            ).addTo(marker_cluster_e868d568377488d39192b8eabe5e66dc);
+        
+    
+            var div_icon_bb70bfb6f00a2e753e6885bf66c4381f = L.divIcon({
+  "html": "\u003cdiv style=\"background-color: #e74c3c; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);\"\u003e\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_ec17ec1ddd597f4e14bf401ee0a421d7 = L.popup({
+  "maxWidth": 380,
+});
+
+        
+            
+                var html_b4b00def0942157e7ce3dde31ef3a3d8 = $(`<div id="html_b4b00def0942157e7ce3dde31ef3a3d8" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 320px;">         <h4 style="color: #1a5276; margin-bottom: 5px;">MEJORAMIENTO Y AMPLIACIÓN DE AGUA POTABLE - QUERECOTILLO...</h4>         <hr style="margin: 5px 0;">         <table style="width: 100%; font-size: 12px;">             <tr><td><strong>CUI:</strong></strong></td><td>2056440</td></tr>             <tr><td><strong>Distrito/Provincia:</strong></td></td><td>QUERECOTILLO / SULLANA</td></tr>             <tr>                 <td><strong>Estado:</strong></td>                 <td><span style="background-color: #e74c3c; color: white; padding: 2px 5px; border-radius: 10px;">PARALIZADO</span></td>             </tr>             <tr><td><strong>Causa:</strong></td><td>Deficiencia en el expediente técnico</td></tr>             <tr>                 <td><strong>Avance Físico:</strong></td>                 <td><progress value="97.0" max="100" style="width: 100px;"></progress> 97.0%</td>             </tr>             <tr><td><strong>Monto:</strong></td><td>S/ 39.758.247.66</td></tr>             <tr><td><strong>Beneficiarios:</strong></td><td>13.477</td></tr>             <tr><td><strong>Tiempo paralizado:</strong></td><td>10.7 años</td></tr>             <tr><td><strong>Tipo:</strong></td><td>AGUA POTABLE / RURAL</td></tr>         </table>     </div>     </div>`)[0];
+                popup_ec17ec1ddd597f4e14bf401ee0a421d7.setContent(html_b4b00def0942157e7ce3dde31ef3a3d8);
+            
+        
+
+        marker_84ed8e57d041dba9b4c3272baec1967b.bindPopup(popup_ec17ec1ddd597f4e14bf401ee0a421d7)
+        ;
+
+        
+    
+    
+            marker_84ed8e57d041dba9b4c3272baec1967b.bindTooltip(
+                `<div>
+                     MEJORAMIENTO Y AMPLIACIÓN DE AGUA POTABL... - PARALIZADO - 97.0%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_84ed8e57d041dba9b4c3272baec1967b.setIcon(div_icon_bb70bfb6f00a2e753e6885bf66c4381f);
+            
+    
+            var marker_f6454565a19a547ecda387e879bcf46b = L.marker(
+                [-5.2383, -79.45],
+                {
+}
+            ).addTo(marker_cluster_e868d568377488d39192b8eabe5e66dc);
+        
+    
+            var div_icon_2e503118b55db72d90c7fdc3f5e805fa = L.divIcon({
+  "html": "\u003cdiv style=\"background-color: #f39c12; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);\"\u003e\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_26c68f42b6ad3487f6f36fa6aeead3d6 = L.popup({
+  "maxWidth": 380,
+});
+
+        
+            
+                var html_c7d330ce725910e1658b9ffd39e12b0d = $(`<div id="html_c7d330ce725910e1658b9ffd39e12b0d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 320px;">         <h4 style="color: #1a5276; margin-bottom: 5px;">REHABILITACIÓN DE AGUA POTABLE - LOCALIDAD PROGRESO KM 65...</h4>         <hr style="margin: 5px 0;">         <table style="width: 100%; font-size: 12px;">             <tr><td><strong>CUI:</strong></strong></td><td>2436071</td></tr>             <tr><td><strong>Distrito/Provincia:</strong></td></td><td>HUARMACA / HUANCABAMBA</td></tr>             <tr>                 <td><strong>Estado:</strong></td>                 <td><span style="background-color: #f39c12; color: white; padding: 2px 5px; border-radius: 10px;">SUSPENDIDO</span></td>             </tr>             <tr><td><strong>Causa:</strong></td><td>Residentes declinaron firma de contratos</td></tr>             <tr>                 <td><strong>Avance Físico:</strong></td>                 <td><progress value="76.47" max="100" style="width: 100px;"></progress> 76.47%</td>             </tr>             <tr><td><strong>Monto:</strong></td><td>S/ 279.696.88</td></tr>             <tr><td><strong>Beneficiarios:</strong></td><td>176</td></tr>             <tr><td><strong>Tiempo paralizado:</strong></td><td>6.5 años</td></tr>             <tr><td><strong>Tipo:</strong></td><td>AGUA POTABLE / RURAL</td></tr>         </table>     </div>     </div>`)[0];
+                popup_26c68f42b6ad3487f6f36fa6aeead3d6.setContent(html_c7d330ce725910e1658b9ffd39e12b0d);
+            
+        
+
+        marker_f6454565a19a547ecda387e879bcf46b.bindPopup(popup_26c68f42b6ad3487f6f36fa6aeead3d6)
+        ;
+
+        
+    
+    
+            marker_f6454565a19a547ecda387e879bcf46b.bindTooltip(
+                `<div>
+                     REHABILITACIÓN DE AGUA POTABLE - LOCALID... - SUSPENDIDO - 76.47%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f6454565a19a547ecda387e879bcf46b.setIcon(div_icon_2e503118b55db72d90c7fdc3f5e805fa);
+            
+    
+            var marker_98c6a8d5b4b787f362219629e62b98e3 = L.marker(
+                [-5.24, -79.455],
+                {
+}
+            ).addTo(marker_cluster_e868d568377488d39192b8eabe5e66dc);
+        
+    
+            var div_icon_9e1539bc79abb7776939aec36481f641 = L.divIcon({
+  "html": "\u003cdiv style=\"background-color: #f39c12; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);\"\u003e\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_041449f06247bd4b311cf7dad57657c5 = L.popup({
+  "maxWidth": 380,
+});
+
+        
+            
+                var html_871bd52c083e5f6ce92cafa6625d08bb = $(`<div id="html_871bd52c083e5f6ce92cafa6625d08bb" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 320px;">         <h4 style="color: #1a5276; margin-bottom: 5px;">REHABILITACIÓN DE AGUA POTABLE - LOCALIDAD HUALAPAMPA...</h4>         <hr style="margin: 5px 0;">         <table style="width: 100%; font-size: 12px;">             <tr><td><strong>CUI:</strong></strong></td><td>2436074</td></tr>             <tr><td><strong>Distrito/Provincia:</strong></td></td><td>HUARMACA / HUANCABAMBA</td></tr>             <tr>                 <td><strong>Estado:</strong></td>                 <td><span style="background-color: #f39c12; color: white; padding: 2px 5px; border-radius: 10px;">SUSPENDIDO</span></td>             </tr>             <tr><td><strong>Causa:</strong></td><td>Residentes declinaron firma de contratos</td></tr>             <tr>                 <td><strong>Avance Físico:</strong></td>                 <td><progress value="65.37" max="100" style="width: 100px;"></progress> 65.37%</td>             </tr>             <tr><td><strong>Monto:</strong></td><td>S/ 493.314.41</td></tr>             <tr><td><strong>Beneficiarios:</strong></td><td>368</td></tr>             <tr><td><strong>Tiempo paralizado:</strong></td><td>6.5 años</td></tr>             <tr><td><strong>Tipo:</strong></td><td>AGUA POTABLE / RURAL</td></tr>         </table>     </div>     </div>`)[0];
+                popup_041449f06247bd4b311cf7dad57657c5.setContent(html_871bd52c083e5f6ce92cafa6625d08bb);
+            
+        
+
+        marker_98c6a8d5b4b787f362219629e62b98e3.bindPopup(popup_041449f06247bd4b311cf7dad57657c5)
+        ;
+
+        
+    
+    
+            marker_98c6a8d5b4b787f362219629e62b98e3.bindTooltip(
+                `<div>
+                     REHABILITACIÓN DE AGUA POTABLE - LOCALID... - SUSPENDIDO - 65.37%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_98c6a8d5b4b787f362219629e62b98e3.setIcon(div_icon_9e1539bc79abb7776939aec36481f641);
+            
+    
+            var marker_db08fdd8814057ba1b203eb53a142422 = L.marker(
+                [-4.65, -79.7167],
+                {
+}
+            ).addTo(marker_cluster_e868d568377488d39192b8eabe5e66dc);
+        
+    
+            var div_icon_a5b458c4db0d9ae6402e92df3adddd73 = L.divIcon({
+  "html": "\u003cdiv style=\"background-color: #f39c12; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);\"\u003e\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_ccf70cbd42bbce825ab329f0d3e16216 = L.popup({
+  "maxWidth": 380,
+});
+
+        
+            
+                var html_527ec0dc11d7750f288389a0c1150ffc = $(`<div id="html_527ec0dc11d7750f288389a0c1150ffc" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 320px;">         <h4 style="color: #1a5276; margin-bottom: 5px;">REHABILITACIÓN DE AGUA POTABLE - LOCALIDAD SAN ISIDRO...</h4>         <hr style="margin: 5px 0;">         <table style="width: 100%; font-size: 12px;">             <tr><td><strong>CUI:</strong></strong></td><td>2436483</td></tr>             <tr><td><strong>Distrito/Provincia:</strong></td></td><td>FRIAS / AYABACA</td></tr>             <tr>                 <td><strong>Estado:</strong></td>                 <td><span style="background-color: #f39c12; color: white; padding: 2px 5px; border-radius: 10px;">SUSPENDIDO</span></td>             </tr>             <tr><td><strong>Causa:</strong></td><td>Residente con rendición observada</td></tr>             <tr>                 <td><strong>Avance Físico:</strong></td>                 <td><progress value="71.58" max="100" style="width: 100px;"></progress> 71.58%</td>             </tr>             <tr><td><strong>Monto:</strong></td><td>S/ 101.827.07</td></tr>             <tr><td><strong>Beneficiarios:</strong></td><td>107</td></tr>             <tr><td><strong>Tiempo paralizado:</strong></td><td>6.4 años</td></tr>             <tr><td><strong>Tipo:</strong></td><td>AGUA POTABLE / RURAL</td></tr>         </table>     </div>     </div>`)[0];
+                popup_ccf70cbd42bbce825ab329f0d3e16216.setContent(html_527ec0dc11d7750f288389a0c1150ffc);
+            
+        
+
+        marker_db08fdd8814057ba1b203eb53a142422.bindPopup(popup_ccf70cbd42bbce825ab329f0d3e16216)
+        ;
+
+        
+    
+    
+            marker_db08fdd8814057ba1b203eb53a142422.bindTooltip(
+                `<div>
+                     REHABILITACIÓN DE AGUA POTABLE - LOCALID... - SUSPENDIDO - 71.58%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_db08fdd8814057ba1b203eb53a142422.setIcon(div_icon_a5b458c4db0d9ae6402e92df3adddd73);
+            
+    
+            var marker_779bd628c5c3d4c1b21d41f0647afdd4 = L.marker(
+                [-5.1667, -80.6],
+                {
+}
+            ).addTo(marker_cluster_e868d568377488d39192b8eabe5e66dc);
+        
+    
+            var div_icon_f5bc4f5fe41368a39bc0949e87edf1c7 = L.divIcon({
+  "html": "\u003cdiv style=\"background-color: #e74c3c; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);\"\u003e\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_5b8aa6612e89995af606a7edd6fb9b15 = L.popup({
+  "maxWidth": 380,
+});
+
+        
+            
+                var html_1673933ce88d86bb5ffb3a4fe611c34e = $(`<div id="html_1673933ce88d86bb5ffb3a4fe611c34e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 320px;">         <h4 style="color: #1a5276; margin-bottom: 5px;">CREACIÓN DEL SERVICIO DE AGUA POTABLE - URB. LOMAS DE PIURA...</h4>         <hr style="margin: 5px 0;">         <table style="width: 100%; font-size: 12px;">             <tr><td><strong>CUI:</strong></strong></td><td>CI44403</td></tr>             <tr><td><strong>Distrito/Provincia:</strong></td></td><td>CURA MORI / PIURA</td></tr>             <tr>                 <td><strong>Estado:</strong></td>                 <td><span style="background-color: #e74c3c; color: white; padding: 2px 5px; border-radius: 10px;">PARALIZADO</span></td>             </tr>             <tr><td><strong>Causa:</strong></td><td>Paralizado en preinversión</td></tr>             <tr>                 <td><strong>Avance Físico:</strong></td>                 <td><progress value="0.0" max="100" style="width: 100px;"></progress> 0.0%</td>             </tr>             <tr><td><strong>Monto:</strong></td><td>S/ 55.206.700.00</td></tr>             <tr><td><strong>Beneficiarios:</strong></td><td>9.255</td></tr>             <tr><td><strong>Tiempo paralizado:</strong></td><td>6.5 años</td></tr>             <tr><td><strong>Tipo:</strong></td><td>AGUA POTABLE / URBANO</td></tr>         </table>     </div>     </div>`)[0];
+                popup_5b8aa6612e89995af606a7edd6fb9b15.setContent(html_1673933ce88d86bb5ffb3a4fe611c34e);
+            
+        
+
+        marker_779bd628c5c3d4c1b21d41f0647afdd4.bindPopup(popup_5b8aa6612e89995af606a7edd6fb9b15)
+        ;
+
+        
+    
+    
+            marker_779bd628c5c3d4c1b21d41f0647afdd4.bindTooltip(
+                `<div>
+                     CREACIÓN DEL SERVICIO DE AGUA POTABLE - ... - PARALIZADO - 0.0%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_779bd628c5c3d4c1b21d41f0647afdd4.setIcon(div_icon_f5bc4f5fe41368a39bc0949e87edf1c7);
+            
+    
+            marker_cluster_e868d568377488d39192b8eabe5e66dc.addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+            var heat_map_58a920dc9ccf2725ec473d4be1269409 = L.heatLayer(
+                [[-5.5576, -80.8222, 1.0], [-5.1945, -80.6328, 1.0], [-5.2, -80.63, 1.0], [-4.9333, -80.35, 1.0], [-4.9039, -80.6853, 1.0], [-4.9, -80.68, 1.0], [-4.8333, -80.45, 1.0], [-5.2383, -79.45, 0.027969688], [-5.24, -79.455, 0.049331441], [-4.65, -79.7167, 0.010182707000000001], [-5.1667, -80.6, 1.0]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 15,
+  "blur": 10,
+}
+            );
+        
+    
+            heat_map_58a920dc9ccf2725ec473d4be1269409.addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+    
+            var layer_control_d76e41987ce56add0b541e27dc7298a8_layers = {
+                base_layers : {
+                    "cartodbvoyager" : tile_layer_fb78e8495c5b8c169efe3ce6705fddd1,
+                    "Imagen Satelital" : tile_layer_bc4414a6fc3268425589c3a6c79bee0b,
+                    "Mapa Calles" : tile_layer_895197f0e3e396b045b1ce1964890467,
+                },
+                overlays :  {
+                    "Proyectos de Saneamiento" : marker_cluster_e868d568377488d39192b8eabe5e66dc,
+                    "Mapa de Calor (Inversi\u00f3n)" : heat_map_58a920dc9ccf2725ec473d4be1269409,
+                },
+            };
+            let layer_control_d76e41987ce56add0b541e27dc7298a8 = L.control.layers(
+                layer_control_d76e41987ce56add0b541e27dc7298a8_layers.base_layers,
+                layer_control_d76e41987ce56add0b541e27dc7298a8_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_f90960b0227e9a5f142689b8ae29c140);
+
+        
+    
+            var tile_layer_882fc67115e8cbb190e84f29475e6cca = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detect_retina": false, "max_native_zoom": 19, "max_zoom": 19, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_4d7ef44bd324a8a711a91c49f2a9eb31 = new L.Control.MiniMap(
+                tile_layer_882fc67115e8cbb190e84f29475e6cca,
+                {
+  "position": "bottomleft",
+  "width": 150,
+  "height": 150,
+  "collapsedWidth": 25,
+  "collapsedHeight": 25,
+  "zoomLevelOffset": -5,
+  "centerFixed": false,
+  "zoomAnimation": false,
+  "toggleDisplay": true,
+  "autoToggleDisplay": false,
+  "minimized": false,
+}
+            );
+            map_f90960b0227e9a5f142689b8ae29c140.addControl(mini_map_4d7ef44bd324a8a711a91c49f2a9eb31);
+        
+    
+            var measure_control_677b118b1362e2decb23eb9eac401870 = new L.Control.Measure(
+                {
+  "position": "topleft",
+  "primaryLengthUnit": "meters",
+  "secondaryLengthUnit": "miles",
+  "primaryAreaUnit": "sqmeters",
+  "secondaryAreaUnit": "acres",
+});
+            map_f90960b0227e9a5f142689b8ae29c140.addControl(measure_control_677b118b1362e2decb23eb9eac401870);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topright",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_f90960b0227e9a5f142689b8ae29c140);
+        
+</script>
+</html>
