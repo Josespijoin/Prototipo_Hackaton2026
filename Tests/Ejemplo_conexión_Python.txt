@@ -1,0 +1,66 @@
+# Ejemplo de conexión de cliente desde otro sistema en Python (script.py)
+
+import requests
+import pandas as pd
+
+class YakuDigitalClient:
+    """Cliente para consumir la API de YAKU DIGITAL"""
+    
+    def __init__(self, base_url="http://localhost:5000"):
+        self.base_url = base_url
+    
+    def get_estadisticas(self):
+        """Obtener estadísticas generales"""
+        response = requests.get(f"{self.base_url}/api/estadisticas")
+        return response.json()
+    
+    def get_proyectos(self, estado=None, provincia=None, tipo=None):
+        """Obtener proyectos con filtros"""
+        params = {}
+        if estado:
+            params['estado'] = estado
+        if provincia:
+            params['provincia'] = provincia
+        if tipo:
+            params['tipo'] = tipo
+        
+        response = requests.get(f"{self.base_url}/api/proyectos", params=params)
+        return response.json()
+    
+    def get_proyecto_by_cui(self, cui):
+        """Obtener un proyecto específico"""
+        response = requests.get(f"{self.base_url}/api/proyectos/{cui}")
+        return response.json()
+    
+    def get_indicadores(self):
+        """Obtener indicadores ENAPRES"""
+        response = requests.get(f"{self.base_url}/api/indicadores")
+        return response.json()
+    
+    def get_provincias(self):
+        """Obtener datos por provincia"""
+        response = requests.get(f"{self.base_url}/api/provincias")
+        return response.json()
+    
+    def to_dataframe(self, data):
+        """Convertir respuesta a DataFrame de pandas"""
+        if 'proyectos' in data:
+            return pd.DataFrame(data['proyectos'])
+        return pd.DataFrame(data)
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    client = YakuDigitalClient()
+    
+    # Obtener estadísticas
+    stats = client.get_estadisticas()
+    print(f"Total proyectos: {stats['total_proyectos']}")
+    print(f"Beneficiarios: {stats['beneficiarios']:,}")
+    
+    # Obtener proyectos paralizados
+    paralizados = client.get_proyectos(estado="PARALIZADO")
+    print(f"\nProyectos paralizados: {paralizados['total']}")
+    
+    # Obtener indicadores
+    indicadores = client.get_indicadores()
+    print(f"\nBrecha agua potable: {indicadores['brecha_agua_porcentaje']}%")

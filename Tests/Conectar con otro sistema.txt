@@ -1,0 +1,13 @@
+# Desde cualquier sistema Python
+
+import requests
+response = requests.get('http://tu-servidor:5000/api/estadisticas')
+data = response.json()
+print(data['total_proyectos'])
+
+
+// Desde cualquier sistema JavaScript
+
+fetch('http://tu-servidor:5000/api/estadisticas')
+    .then(res => res.json())
+    .then(data => console.log(data));

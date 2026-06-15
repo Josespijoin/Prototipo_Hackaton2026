@@ -1,0 +1,36 @@
+// Ejemplo de conexión de cliente desde otro sistema en Java (script.js)
+
+class YakuDigitalAPI {
+    constructor(baseUrl = 'http://localhost:5000') {
+        this.baseUrl = baseUrl;
+    }
+    
+    async getEstadisticas() {
+        const response = await fetch(`${this.baseUrl}/api/estadisticas`);
+        return response.json();
+    }
+    
+    async getProyectos(filtros = {}) {
+        const params = new URLSearchParams(filtros);
+        const response = await fetch(`${this.baseUrl}/api/proyectos?${params}`);
+        return response.json();
+    }
+    
+    async getIndicadores() {
+        const response = await fetch(`${this.baseUrl}/api/indicadores`);
+        return response.json();
+    }
+}
+
+// Ejemplo de uso
+const api = new YakuDigitalAPI();
+
+async function mostrarDatos() {
+    const stats = await api.getEstadisticas();
+    console.log('Estadísticas:', stats);
+    
+    const proyectosParalizados = await api.getProyectos({ estado: 'PARALIZADO' });
+    console.log('Proyectos paralizados:', proyectosParalizados);
+}
+
+mostrarDatos();
